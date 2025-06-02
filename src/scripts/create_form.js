@@ -12,18 +12,22 @@ const categories = [
 ];
 const difficulties = ['easy', 'medium', 'hard']
 
-const createCheckbox = (item) => {
-  const div = document.createElement('div')
-  div.innerHTML = `<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="checkbox-${item}">
-  <label class="form-check-label" for="checkDefault">
-    ${titleCase(item)}
-  </label>
-</div>`
-  return div
+const setCheckboxId = (collectionName) => {
+  return (item) => {
+    const div = document.createElement('div')
+    div.innerHTML = `
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" collection='${collectionName.toLowerCase()}' id="${item}">
+        <label class="form-check-label" for="${item}">
+          ${titleCase(item)}
+        </label>
+      </div>`
+    return div
+  }
 }
 
-const createAndAppendCheckboxes = (fieldset, collection) => {
+const createAndAppendCheckboxes = (fieldset, collection, collectionName) => {
+  const createCheckbox = setCheckboxId(collectionName)
   const newCheckboxes = collection.map(createCheckbox)
   newCheckboxes.forEach(checkbox => fieldset.appendChild(checkbox))
 }
@@ -40,7 +44,7 @@ const createAndAppendFieldset = (row, collection, collectionName) => {
   col.className = 'col'
   const fieldSet = document.createElement('fieldset')
   createLegend(collectionName, fieldSet)
-  createAndAppendCheckboxes(fieldSet, collection)
+  createAndAppendCheckboxes(fieldSet, collection, collectionName)
   col.appendChild(fieldSet)
   row.appendChild(col)
 }
@@ -69,6 +73,6 @@ const createForm = () => {
   createAndAppendFieldset(row, categories, 'Categories')
   createAndAppendFieldset(row, difficulties, 'Difficulties')
   createAndAppendSubmitButton(form)
-  form.addEventListener('submit', console.log)
+  form.addEventListener('submit', startQuiz)
   return form
 }
