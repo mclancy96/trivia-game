@@ -11,5 +11,5 @@ const startQuiz = (submitEvent) => {
   console.log('Quiz started')
   const selectedInputs = submitEvent.target.querySelectorAll('input:checked')
   const { selectedCategories, selectedDifficulties } = parseSelections(Array.from(selectedInputs))
-  console.log('starting quiz with the categories:', selectedCategories, 'and the difficulties', selectedDifficulties)
+  fetchAndDisplayQuestions(selectedCategories, selectedDifficulties)
 }

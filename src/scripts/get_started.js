@@ -10,8 +10,7 @@ const showCategoriesAndDifficulties = () => {
 }
 
 const promptQuizOptions = () => {
-  const gsButton = document.getElementById('getStarted');
-  gsButton.remove();
+  document.getElementById('content').innerHTML = ''
   showCategoriesAndDifficulties()
 }
 
