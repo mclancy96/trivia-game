@@ -54,7 +54,7 @@ const createAndAppendRow = (form) => {
 
 const createAndAppendSubmitButton = (form) => {
   const div = document.createElement('div')
-  div.className = 'text-center'
+  div.className = 'text-center m-4'
   const btn = document.createElement('button')
   btn.type = 'submit'
   btn.className = "btn btn-lg btn-primary text-center"
