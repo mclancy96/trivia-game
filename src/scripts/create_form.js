@@ -56,7 +56,7 @@ const createAndAppendRow = (form) => {
   return row
 }
 
-const createAndAppendSubmitButton = (form) => {
+const createAndAppendStartButton = (form) => {
   const div = document.createElement('div')
   div.className = 'text-center m-4'
   const btn = document.createElement('button')
@@ -72,7 +72,7 @@ const createForm = () => {
   const row = createAndAppendRow(form)
   createAndAppendFieldset(row, categories, 'Categories')
   createAndAppendFieldset(row, difficulties, 'Difficulties')
-  createAndAppendSubmitButton(form)
+  createAndAppendStartButton(form)
   form.addEventListener('submit', startQuiz)
   return form
 }
