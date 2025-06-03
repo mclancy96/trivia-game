@@ -4,7 +4,8 @@ const game = {
     incorrect: 0,
     recordedAnswers: {}
   },
-  questionCount: 0
+  questionCount: 0,
+  completedQuestions: 0,
 }
 
 const showCategoriesAndDifficulties = () => {
