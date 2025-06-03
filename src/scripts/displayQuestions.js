@@ -1,25 +1,3 @@
-const nextQuestion = () => {
-  console.log('going to next question')
-}
-
-const saveAnswer = (questionId, result, selectedAnswer, correctAnswer) => {
-  if (result === 'correct') {
-    alert('Correct!')
-    game.answers.correct++
-  } else {
-    alert('Incorrect!')
-    game.answers.incorrect++
-  }
-  game.answers.recordedAnswers[questionId] = { selectedAnswer, correctAnswer }
-}
-
-const recordAnswer = (target, correctAnswer) => {
-  const selectedAnswer = target.querySelector('input:checked').value
-  const questionId = target.querySelector('input:checked').getAttribute('question')
-  if (selectedAnswer === correctAnswer) saveAnswer(questionId, 'correct', selectedAnswer, correctAnswer)
-  else saveAnswer(questionId, 'incorrect', selectedAnswer, correctAnswer)
-}
-
 const setNextQuestion = (questions, questionIndex, correctAnswer) => {
   return (submitEvent) => {
     submitEvent.preventDefault();
@@ -93,10 +71,11 @@ const displayQuestion = (question, questionIndex, questions) => {
 
 const displayScoreSection = () => {
   const score = document.getElementById('score')
-  const p = document.createElement('p')
-  p.textContent = 'SCORE SECTION (to be filled in with next pr)'
-  p.className = 'bg-light text-black'
-  score.appendChild(p)
+  const scoreDisplay = document.createElement('div')
+  scoreDisplay.innerHTML = `
+   <h5> Correct: <span id='correct' class='text-success'>0</span>  Incorrect: <span id='incorrect' class='text-danger'>0</span>  Remaining: <span id='remaining'>${game.questionCount - game.completedQuestions}</span></h5>
+  `
+  score.appendChild(scoreDisplay)
 }
 
 const setupScoreSection = () => {
@@ -131,9 +110,9 @@ const beginQuestionLoop = (questions) => {
 }
 
 const displayQuestions = (questions) => {
+  game.questionCount = questions.length
   const content = document.getElementById('content')
   content.innerHTML = ''
   setupQuizStructure()
-  game.questionCount = questions.length
   beginQuestionLoop(questions)
 }
