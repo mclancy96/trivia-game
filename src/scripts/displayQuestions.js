@@ -2,24 +2,37 @@ const nextQuestion = () => {
   console.log('going to next question')
 }
 
-const recordAnswer = () => {
-  //TODO record correct/incorrect
-  //clear question section
+const saveAnswer = (questionId, result, selectedAnswer, correctAnswer) => {
+  if (result === 'correct') {
+    alert('Correct!')
+    game.answers.correct++
+  } else {
+    alert('Incorrect!')
+    game.answers.incorrect++
+  }
+  game.answers.recordedAnswers[questionId] = { selectedAnswer, correctAnswer }
 }
 
-const setNextQuestion = (questions, questionIndex) => {
+const recordAnswer = (target, correctAnswer) => {
+  const selectedAnswer = target.querySelector('input:checked').value
+  const questionId = target.querySelector('input:checked').getAttribute('question')
+  if (selectedAnswer === correctAnswer) saveAnswer(questionId, 'correct', selectedAnswer, correctAnswer)
+  else saveAnswer(questionId, 'incorrect', selectedAnswer, correctAnswer)
+}
+
+const setNextQuestion = (questions, questionIndex, correctAnswer) => {
   return (submitEvent) => {
     submitEvent.preventDefault();
-    recordAnswer()
+    recordAnswer(submitEvent.target, correctAnswer)
     showCurrentQuestion(questions, questionIndex + 1)
   }
 }
 
-const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIndex) => {
+const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIndex, questionIndex) => {
   const answerRadio = document.createElement('div')
   answerRadio.className = "form-check"
   answerRadio.innerHTML = `
-    <input class="form-check-input" type="radio" name="answerRadio" id="${answerIndex}">
+    <input class="form-check-input" type="radio" name="answerRadio" question="${questionIndex}" id="${answerIndex}" required value="${answer}">
     <label class="form-check-label" for="${answerIndex}">
       ${answer}
     </label>
@@ -27,10 +40,10 @@ const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIn
   questionRadiosDiv.appendChild(answerRadio)
 }
 
-const createAndAppendAnswerRadios = (answers, questionForm) => {
+const createAndAppendAnswerRadios = (answers, questionForm, questionIndex) => {
   const questionRadiosDiv = document.createElement('div')
   questionRadiosDiv.className = 'card-text px-5 my-2'
-  answers.forEach((answer, answerIndex) => createAndAppendQuestionAnswerRadios(answer, questionRadiosDiv, answerIndex))
+  answers.forEach((answer, answerIndex) => createAndAppendQuestionAnswerRadios(answer, questionRadiosDiv, answerIndex, questionIndex))
   questionForm.appendChild(questionRadiosDiv)
 }
 
@@ -58,14 +71,14 @@ const createAndAppendCardFormat = (form) => {
   return body
 }
 
-const createAndAppendAnswerForm = (question, questionIndex, questions, answers) => {
+const createAndAppendAnswerForm = (question, questionIndex, questions, answers, correctAnswer) => {
   const questionForm = document.createElement('form')
   questionForm.className = 'd-flex flex-column justify-content-center align-items-center'
   const cardBody = createAndAppendCardFormat(questionForm)
   createAndAppendQuestionTitle(question, questionIndex, cardBody)
-  createAndAppendAnswerRadios(answers, cardBody)
+  createAndAppendAnswerRadios(answers, cardBody, questionIndex)
   createAndAppendQuestionSubmitButton(cardBody)
-  const checkAnswerAndDisplayNextQuestion = setNextQuestion(questions, questionIndex)
+  const checkAnswerAndDisplayNextQuestion = setNextQuestion(questions, questionIndex, correctAnswer)
   questionForm.addEventListener('submit', checkAnswerAndDisplayNextQuestion)
   return questionForm
 }
@@ -74,7 +87,7 @@ const displayQuestion = (question, questionIndex, questions) => {
   const questionSection = document.getElementById('question')
   let answers = [question.correctAnswer, ...question.incorrectAnswers]
   answers = shuffle(answers)
-  const questionForm = createAndAppendAnswerForm(question, questionIndex, questions, answers)
+  const questionForm = createAndAppendAnswerForm(question, questionIndex, questions, answers, question.correctAnswer)
   questionSection.appendChild(questionForm)
 }
 
@@ -121,5 +134,6 @@ const displayQuestions = (questions) => {
   const content = document.getElementById('content')
   content.innerHTML = ''
   setupQuizStructure()
+  game.questionCount = questions.length
   beginQuestionLoop(questions)
 }
