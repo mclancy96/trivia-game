@@ -29,30 +29,42 @@ const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIn
 
 const createAndAppendAnswerRadios = (answers, questionForm) => {
   const questionRadiosDiv = document.createElement('div')
+  questionRadiosDiv.className = 'card-text px-5 my-2'
   answers.forEach((answer, answerIndex) => createAndAppendQuestionAnswerRadios(answer, questionRadiosDiv, answerIndex))
   questionForm.appendChild(questionRadiosDiv)
 }
 
 const createAndAppendQuestionTitle = (question, questionIndex, questionForm) => {
-  const questionTitle = document.createElement('h2')
+  const questionTitle = document.createElement('h5')
+  questionTitle.className = "card-title text-center"
   questionTitle.textContent = `${Number.parseInt(questionIndex) + 1}. ${question.question.text}`
   questionForm.appendChild(questionTitle)
 }
 
 const createAndAppendQuestionSubmitButton = (questionForm) => {
-  const button = document.createElement('button')
-  button.className = 'btn btn-lg btn-primary'
-  button.textContent = 'Submit Answer'
-  button.type = 'submit';
+  const button = document.createElement('div')
+  button.className = 'text-center'
+  button.innerHTML = `<button class="btn btn-lg btn-primary" type="submit">Submit Answer</button>`
   questionForm.appendChild(button)
+}
+
+const createAndAppendCardFormat = (form) => {
+  const card = document.createElement('div')
+  card.className = 'card w-75'
+  const body = document.createElement('div')
+  body.className = 'card-body'
+  card.appendChild(body)
+  form.appendChild(card)
+  return body
 }
 
 const createAndAppendAnswerForm = (question, questionIndex, questions, answers) => {
   const questionForm = document.createElement('form')
-  questionForm.className = 'align-items-center'
-  createAndAppendQuestionTitle(question, questionIndex, questionForm)
-  createAndAppendAnswerRadios(answers, questionForm)
-  createAndAppendQuestionSubmitButton(questionForm)
+  questionForm.className = 'd-flex flex-column justify-content-center align-items-center'
+  const cardBody = createAndAppendCardFormat(questionForm)
+  createAndAppendQuestionTitle(question, questionIndex, cardBody)
+  createAndAppendAnswerRadios(answers, cardBody)
+  createAndAppendQuestionSubmitButton(cardBody)
   const checkAnswerAndDisplayNextQuestion = setNextQuestion(questions, questionIndex)
   questionForm.addEventListener('submit', checkAnswerAndDisplayNextQuestion)
   return questionForm
