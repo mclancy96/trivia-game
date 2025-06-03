@@ -1,3 +1,12 @@
+const game = {
+  answers: {
+    correct: 0,
+    incorrect: 0,
+    recordedAnswers: {}
+  },
+  questionCount: 0
+}
+
 const showCategoriesAndDifficulties = () => {
   const content = document.getElementById('content')
   const prompt = document.createElement('p');
