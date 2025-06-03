@@ -15,14 +15,22 @@ const setNextQuestion = (questions, questionIndex) => {
   }
 }
 
-const createAndAppendAnswerSelect = (answers, questionForm) => {
-  const questionSelect = document.createElement('select')
-  answers.forEach(answer => {
-    const answerOption = document.createElement('option')
-    answerOption.textContent = answer
-    questionSelect.appendChild(answerOption)
-  })
-  questionForm.appendChild(questionSelect)
+const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIndex) => {
+  const answerRadio = document.createElement('div')
+  answerRadio.className = "form-check"
+  answerRadio.innerHTML = `
+    <input class="form-check-input" type="radio" name="answerRadio" id="${answerIndex}">
+    <label class="form-check-label" for="${answerIndex}">
+      ${answer}
+    </label>
+  `
+  questionRadiosDiv.appendChild(answerRadio)
+}
+
+const createAndAppendAnswerRadios = (answers, questionForm) => {
+  const questionRadiosDiv = document.createElement('div')
+  answers.forEach((answer, answerIndex) => createAndAppendQuestionAnswerRadios(answer, questionRadiosDiv, answerIndex))
+  questionForm.appendChild(questionRadiosDiv)
 }
 
 const createAndAppendQuestionTitle = (question, questionIndex, questionForm) => {
@@ -41,8 +49,9 @@ const createAndAppendQuestionSubmitButton = (questionForm) => {
 
 const createAndAppendAnswerForm = (question, questionIndex, questions, answers) => {
   const questionForm = document.createElement('form')
+  questionForm.className = 'align-items-center'
   createAndAppendQuestionTitle(question, questionIndex, questionForm)
-  createAndAppendAnswerSelect(answers, questionForm)
+  createAndAppendAnswerRadios(answers, questionForm)
   createAndAppendQuestionSubmitButton(questionForm)
   const checkAnswerAndDisplayNextQuestion = setNextQuestion(questions, questionIndex)
   questionForm.addEventListener('submit', checkAnswerAndDisplayNextQuestion)
@@ -81,10 +90,11 @@ const setupQuizStructure = () => {
 }
 
 const showCurrentQuestion = (questions, currentQuestionIndex) => {
+  const questionSection = document.getElementById('question');
   if (currentQuestionIndex < questions.length) {
+    questionSection.innerHTML = ''
     displayQuestion(questions[currentQuestionIndex], currentQuestionIndex, questions);
   } else {
-    const questionSection = document.getElementById('question');
     questionSection.innerHTML = '<h2>Quiz Complete!</h2>';
   }
 };

@@ -12,6 +12,5 @@ const fetchQuestions = (selectedCategories, selectedDifficulties) => {
 
 const fetchAndDisplayQuestions = (selectedCategories, selectedDifficulties) => {
   document.getElementById('content').innerHTML = ''
-  console.log('starting quiz with the categories:', selectedCategories, 'and the difficulties', selectedDifficulties)
   fetchQuestions(selectedCategories, selectedDifficulties)
 }
