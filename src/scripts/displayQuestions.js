@@ -91,6 +91,7 @@ const setupQuizStructure = () => {
   content.appendChild(question)
   setupScoreSection()
   displayScoreSection()
+  addResetButton()
 }
 
 const showCurrentQuestion = (questions, currentQuestionIndex) => {

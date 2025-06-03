@@ -1,12 +1,16 @@
-const game = {
-  answers: {
-    correct: 0,
-    incorrect: 0,
-    recordedAnswers: {}
-  },
-  questionCount: 0,
-  completedQuestions: 0,
+const resetGame = () => {
+  return {
+    answers: {
+      correct: 0,
+      incorrect: 0,
+      recordedAnswers: {}
+    },
+    questionCount: 0,
+    completedQuestions: 0,
+  }
 }
+
+let game = resetGame()
 
 const showCategoriesAndDifficulties = () => {
   const content = document.getElementById('content')
