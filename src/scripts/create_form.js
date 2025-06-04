@@ -73,7 +73,7 @@ const createAndAppendNumInputFieldset = (row) => {
 
 const createAndAppendRow = (form) => {
   const row = document.createElement('div')
-  row.className = 'row'
+  row.className = 'row container'
   form.appendChild(row)
   return row
 }
