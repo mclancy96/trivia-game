@@ -20,7 +20,8 @@ const createAndAppendScoreDetails = (questionSection) => {
 
 const showEndOfGameSummary = (questionSection) => {
   createAndAppendScoreDetails(questionSection)
-  
+  const score = document.getElementById('score')
+  score.innerHTML = ''
 }
 
 
