@@ -1,6 +1,7 @@
 const setNextQuestion = (questions, questionIndex, correctAnswer) => {
   return (submitEvent) => {
     submitEvent.preventDefault();
+    if (timerIntervals.length > 0) clearOutIntervals()
     recordAnswer(submitEvent.target, correctAnswer)
     showCurrentQuestion(questions, questionIndex + 1)
   }
@@ -95,6 +96,7 @@ const showCurrentQuestion = (questions, currentQuestionIndex) => {
     questionSection.innerHTML = ''
     displayQuestion(questions[currentQuestionIndex], currentQuestionIndex, questions);
   } else {
+    clearOutIntervals()
     questionSection.innerHTML = '<h2>Quiz Complete!</h2>';
     showEndOfGameSummary(questionSection)
   }

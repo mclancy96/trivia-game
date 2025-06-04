@@ -2,6 +2,7 @@ const resetQuiz = () => {
   document.getElementById('score').innerHTML = ''
   game = resetGame()
   promptQuizOptions();
+  clearOutIntervals()
 }
 
 const createAndAppendResetButton = (buttonDiv) => {
