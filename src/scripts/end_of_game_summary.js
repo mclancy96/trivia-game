@@ -24,20 +24,3 @@ const showEndOfGameSummary = (questionSection) => {
   const score = document.getElementById('score')
   score.innerHTML = ''
 }
-
-
-{/* <article class="score-details">
-    <p><strong>Total Questions:</strong> <span id="total-questions">10</span></p>
-    <p><strong>Correct Answers:</strong> <span id="correct-answers">8</span></p>
-    <p><strong>Incorrect Answers:</strong> <span id="incorrect-answers">2</span></p>
-    <p><strong>Score:</strong> <span id="score-percentage">80%</span></p>
-  </article>
-
-  <article class="feedback">
-    <p id="performance-feedback">Great job! You're a trivia master 🧠</p>
-  </article>
-
-  <nav class="summary-actions">
-    <button id="play-again">Play Again</button>
-    <button id="exit-game">Exit</button>
-  </nav> */}
