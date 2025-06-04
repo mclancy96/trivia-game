@@ -16,6 +16,7 @@ const createAndAppendScoreDetails = (questionSection) => {
   createAndAppendScoreDetail(article, 'Correct Answers: ', game.answers.correct)
   createAndAppendScoreDetail(article, 'Incorrect Answers: ', game.answers.incorrect)
   createAndAppendScoreDetail(article, 'Score: ', `${((game.answers.correct / game.questionCount) * 100).toFixed(2)}%`)
+  createAndAppendScoreDetail(article, 'Elapsed Time: ', `${(((Date.now() - game.quizStarted) / 1000) / 60).toFixed(2)} minutes`)
   questionSection.appendChild(article)
 }
 
@@ -24,3 +25,4 @@ const showEndOfGameSummary = (questionSection) => {
   const score = document.getElementById('score')
   score.innerHTML = ''
 }
+
