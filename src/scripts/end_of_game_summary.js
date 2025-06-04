@@ -11,6 +11,7 @@ const createAndAppendScoreDetail = (parent, detail, detailValue) => {
 
 const createAndAppendScoreDetails = (questionSection) => {
   const article = document.createElement('article')
+  article.className = 'm-4'
   createAndAppendScoreDetail(article, 'Total Questions: ', game.questionCount)
   createAndAppendScoreDetail(article, 'Correct Answers: ', game.answers.correct)
   createAndAppendScoreDetail(article, 'Incorrect Answers: ', game.answers.incorrect)
