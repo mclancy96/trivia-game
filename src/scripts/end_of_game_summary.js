@@ -19,7 +19,7 @@ const congratulate = () => {
   } else if (result > .45) {
     playSound('oooof.mp3')
   } else {
-    playSound('wasted')
+    playSound('wasted.mp3')
   }
 }
 
@@ -36,7 +36,7 @@ const createAndAppendScoreDetail = (parent, detail, detailValue) => {
 
 const createAndAppendScoreDetails = (questionSection) => {
   const article = document.createElement('article')
-  article.className = 'm-4'
+  article.className = 'm-4 border border-2 p-3'
   createAndAppendScoreDetail(article, 'Total Questions: ', game.questionCount)
   createAndAppendScoreDetail(article, 'Correct Answers: ', game.answers.correct)
   createAndAppendScoreDetail(article, 'Incorrect Answers: ', game.answers.incorrect)
