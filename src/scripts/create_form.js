@@ -49,6 +49,28 @@ const createAndAppendFieldset = (row, collection, collectionName) => {
   row.appendChild(col)
 }
 
+const createAndAppendNumInput = (fieldset) => {
+  const input = document.createElement('input')
+  input.className = 'form-control'
+  input.type = 'number'
+  input.value = 20
+  input.name = 'questionsNumber'
+  input.id = 'questionsNumber'
+  input.max = 50
+  input.min = 1
+  fieldset.appendChild(input)
+}
+
+const createAndAppendNumInputFieldset = (row) => {
+  const col = document.createElement('div')
+  col.className = 'col'
+  const fieldSet = document.createElement('fieldset')
+  createLegend('Select Number of Questions', fieldSet)
+  createAndAppendNumInput(fieldSet)
+  col.appendChild(fieldSet)
+  row.appendChild(col)
+}
+
 const createAndAppendRow = (form) => {
   const row = document.createElement('div')
   row.className = 'row'
@@ -72,6 +94,7 @@ const createForm = () => {
   const row = createAndAppendRow(form)
   createAndAppendFieldset(row, categories, 'Categories')
   createAndAppendFieldset(row, difficulties, 'Difficulties')
+  createAndAppendNumInputFieldset(row)
   createAndAppendStartButton(form)
   form.addEventListener('submit', startQuiz)
   return form
