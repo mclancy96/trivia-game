@@ -14,8 +14,7 @@ const createAndAppendResetButton = (buttonDiv) => {
 
 const addResetButton = () => {
   const container = document.querySelector('#container');
-  const buttonDiv = document.createElement('div')
-  buttonDiv.id = 'resetButton'
+  const buttonDiv = document.getElementById('resetButton')
   buttonDiv.className = 'text-center position-absolute bottom-0 start-50 translate-middle-x'
   createAndAppendResetButton(buttonDiv)
   container.appendChild(buttonDiv)
