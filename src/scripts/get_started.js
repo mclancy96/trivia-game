@@ -7,6 +7,7 @@ const resetGame = () => {
     },
     questionCount: 0,
     completedQuestions: 0,
+    answerTime: 0
   }
 }
 

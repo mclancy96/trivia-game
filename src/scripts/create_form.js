@@ -32,11 +32,21 @@ const createAndAppendCheckboxes = (fieldset, collection, collectionName) => {
   newCheckboxes.forEach(checkbox => fieldset.appendChild(checkbox))
 }
 
-const createLegend = (collectionName, fieldset) => {
+const createAndAppendHelper = (helperText, parent) => {
+  const helperDiv = document.createElement('div')
+  helperDiv.className = "form-text"
+  helperDiv.textContent = helperText
+  parent.appendChild(helperDiv)
+}
+
+const createLegend = (collectionName, fieldset, helperText = '') => {
   const legend = document.createElement('legend')
   legend.innerHTML = `<strong>${collectionName}</strong>`
   legend.className = 'col-form-label-lg text-center'
   fieldset.appendChild(legend)
+  if (helperText !== '') {
+    createAndAppendHelper(helperText, fieldset)
+  }
 }
 
 const createAndAppendFieldset = (row, collection, collectionName) => {
@@ -50,24 +60,41 @@ const createAndAppendFieldset = (row, collection, collectionName) => {
   row.appendChild(col)
 }
 
-const createAndAppendNumInput = (fieldset) => {
+const numberOfQuestionsOptions = {
+  value: 20,
+  name: 'questionsNumber',
+  id: 'questionsNumber',
+  max: 50,
+  min: 1,
+}
+
+const durationOptions = {
+  value: 0,
+  name: 'duration',
+  id: 'duration',
+  min: 0,
+}
+
+const createAndAppendNumInput = (fieldset, options) => {
   const input = document.createElement('input')
   input.className = 'form-control'
   input.type = 'number'
-  input.value = 20
-  input.name = 'questionsNumber'
-  input.id = 'questionsNumber'
-  input.max = 50
-  input.min = 1
+  input.value = options.value
+  input.name = options.name
+  input.id = options.id
+  input.max = options.max
+  input.min = options.min
   fieldset.appendChild(input)
 }
 
-const createAndAppendNumInputFieldset = (row) => {
+const createAndAppendNumInputFieldsets = (row) => {
   const col = document.createElement('div')
   col.className = 'col'
   const fieldSet = document.createElement('fieldset')
   createLegend('Select Number of Questions', fieldSet)
-  createAndAppendNumInput(fieldSet)
+  createAndAppendNumInput(fieldSet, numberOfQuestionsOptions)
+  createLegend('Duration of Each Question', fieldSet, 'This is the number of seconds you will have to answer each question. Leave at 0 to have no timer')
+  createAndAppendNumInput(fieldSet, durationOptions)
   col.appendChild(fieldSet)
   row.appendChild(col)
 }
@@ -95,7 +122,7 @@ const createForm = () => {
   const row = createAndAppendRow(form)
   createAndAppendFieldset(row, categories, 'Categories')
   createAndAppendFieldset(row, difficulties, 'Difficulties')
-  createAndAppendNumInputFieldset(row)
+  createAndAppendNumInputFieldsets(row)
   createAndAppendStartButton(form)
   form.addEventListener('submit', startQuiz)
   return form
