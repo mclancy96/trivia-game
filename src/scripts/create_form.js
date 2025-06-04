@@ -34,8 +34,8 @@ const createAndAppendCheckboxes = (fieldset, collection, collectionName) => {
 
 const createLegend = (collectionName, fieldset) => {
   const legend = document.createElement('legend')
-  legend.textContent = collectionName
-  legend.className = 'col-form-label-lg'
+  legend.innerHTML = `<strong>${collectionName}</strong>`
+  legend.className = 'col-form-label-lg text-center'
   fieldset.appendChild(legend)
 }
 
@@ -43,6 +43,7 @@ const createAndAppendFieldset = (row, collection, collectionName) => {
   const col = document.createElement('div')
   col.className = 'col'
   const fieldSet = document.createElement('fieldset')
+  fieldSet.className = 'px-3'
   createLegend(collectionName, fieldSet)
   createAndAppendCheckboxes(fieldSet, collection, collectionName)
   col.appendChild(fieldSet)
