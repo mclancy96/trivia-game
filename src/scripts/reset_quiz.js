@@ -5,13 +5,13 @@ const resetQuiz = () => {
 }
 
 const addResetButton = () => {
-  const content = document.querySelector('#content');
+  const container = document.querySelector('#container');
   const buttonDiv = document.createElement('div')
-  buttonDiv.className = 'text-center m-4'
+  buttonDiv.className = 'text-center position-absolute bottom-0 start-50 translate-middle-x'
   const button = document.createElement('button')
   button.className = 'btn btn-lg btn-danger'
   button.textContent = 'Reset Quiz'
   button.addEventListener('click', resetQuiz)
   buttonDiv.appendChild(button)
-  content.appendChild(buttonDiv)
+  container.appendChild(buttonDiv)
 }
