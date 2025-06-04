@@ -1,5 +1,5 @@
 const playSound = (sound) => {
-  const thinkAudio = new Audio(`sounds/${sound}.mp3`)
+  const thinkAudio = new Audio(`sounds/${sound}`)
   thinkAudio.volume = 1;
   thinkAudio.play()
 }
@@ -7,17 +7,17 @@ const playSound = (sound) => {
 const congratulate = () => {
   const result = game.answers.correct / game.questionCount
   if (result > .95) {
-    playSound('nice')
+    playSound('nice.mp3')
   } else if (result > .85) {
-    playSound('pretty_good')
+    playSound('pretty_good.mp3')
   } else if (result > .75) {
-    playSound('not_bad')
+    playSound('not_bad.mp3')
   } else if (result > .65) {
-    playSound('not_great')
+    playSound('not_great.mp3')
   } else if (result > .55) {
-    playSound('oof')
+    playSound('oof.mp3')
   } else if (result > .45) {
-    playSound('oooof')
+    playSound('oooof.mp3')
   } else {
     playSound('wasted')
   }
