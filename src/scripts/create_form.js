@@ -51,7 +51,7 @@ const createLegend = (collectionName, fieldset, helperText = '') => {
 
 const createAndAppendFieldset = (row, collection, collectionName) => {
   const col = document.createElement('div')
-  col.className = 'col'
+  col.className = 'col border p-2 m-1 border-2 border-success'
   const fieldSet = document.createElement('fieldset')
   fieldSet.className = 'px-3'
   createLegend(collectionName, fieldSet)
@@ -89,7 +89,7 @@ const createAndAppendNumInput = (fieldset, options) => {
 
 const createAndAppendNumInputFieldsets = (row) => {
   const col = document.createElement('div')
-  col.className = 'col'
+  col.className = 'col border m-1 p-2 border-2 border-success'
   const fieldSet = document.createElement('fieldset')
   createLegend('Select Number of Questions', fieldSet)
   createAndAppendNumInput(fieldSet, numberOfQuestionsOptions)
