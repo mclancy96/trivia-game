@@ -78,18 +78,11 @@ const displayScoreSection = () => {
   score.appendChild(scoreDisplay)
 }
 
-const setupScoreSection = () => {
-  const score = document.createElement('div')
-  score.id = 'score'
-  document.getElementById('header').append(score)
-}
-
 const setupQuizStructure = () => {
   const content = document.getElementById('content')
   const question = document.createElement('div')
   question.id = 'question'
   content.appendChild(question)
-  setupScoreSection()
   displayScoreSection()
   addResetButton()
 }

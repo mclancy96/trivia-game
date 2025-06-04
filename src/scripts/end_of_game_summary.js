@@ -20,6 +20,7 @@ const createAndAppendScoreDetails = (questionSection) => {
 
 const showEndOfGameSummary = (questionSection) => {
   createAndAppendScoreDetails(questionSection)
+  
 }
 
 
