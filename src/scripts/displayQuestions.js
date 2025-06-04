@@ -65,8 +65,10 @@ const displayQuestion = (question, questionIndex, questions) => {
   const questionSection = document.getElementById('question')
   let answers = [question.correctAnswer, ...question.incorrectAnswers]
   answers = shuffle(answers)
+  createAndAppendTimer(questionSection)
   const questionForm = createAndAppendAnswerForm(question, questionIndex, questions, answers, question.correctAnswer)
   questionSection.appendChild(questionForm)
+  startTimer()
 }
 
 const displayScoreSection = () => {

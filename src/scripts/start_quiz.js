@@ -12,5 +12,6 @@ const startQuiz = (submitEvent) => {
   const selectedInputs = submitEvent.target.querySelectorAll('input:checked')
   const { selectedCategories, selectedDifficulties } = parseSelections(Array.from(selectedInputs))
   const numberOfQuestions = document.querySelector('#questionsNumber').value
+  game.questionDuration = Number.parseInt(document.querySelector('#duration').value)
   fetchAndDisplayQuestions(selectedCategories, selectedDifficulties, numberOfQuestions)
 }

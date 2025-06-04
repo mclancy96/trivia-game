@@ -7,7 +7,7 @@ const resetGame = () => {
     },
     questionCount: 0,
     completedQuestions: 0,
-    answerTime: 0
+    questionDuration: 0
   }
 }
 
@@ -17,7 +17,7 @@ const showCategoriesAndDifficulties = () => {
   const content = document.getElementById('content')
   const prompt = document.createElement('p');
   prompt.innerHTML = "<h2>Welcome to QuizWhiz!</h2><br>Please select the categories and difficulties you'd \
-  like to include for your quiz. Selecting no options for either of the sections will include all of the options."
+  like to include for your quiz. Selecting no options for the category or difficulty sections will include all of the options."
   prompt.className = 'text-center'
   const form = createForm();
   content.appendChild(prompt)
