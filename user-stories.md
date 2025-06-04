@@ -93,3 +93,14 @@ After the last question, show a results screen with:
 - Percentage correct
 - Option to restart
 
+---
+
+### Feature 8: Allow Choice of Number of Questions
+
+#### User Story
+
+As a user, I want to be able to select the number of questions that will be included in the quiz so that I can have more or less questions in the quiz if desired
+
+#### Details
+
+At the start of the quiz, there will be a new input that allows users to enter a number that will represent the number of questions that will be asked during the quiz
