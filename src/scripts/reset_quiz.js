@@ -1,8 +1,9 @@
 const resetQuiz = () => {
   document.getElementById('score').innerHTML = ''
   game = resetGame()
+  stopThinkAudio();
   promptQuizOptions();
-  clearOutIntervals()
+  clearOutIntervals();
 }
 
 const createAndAppendResetButton = (buttonDiv) => {

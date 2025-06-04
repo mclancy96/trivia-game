@@ -97,12 +97,14 @@ const showCurrentQuestion = (questions, currentQuestionIndex) => {
     displayQuestion(questions[currentQuestionIndex], currentQuestionIndex, questions);
   } else {
     clearOutIntervals()
+    stopThinkAudio()
     questionSection.innerHTML = '<h2>Quiz Complete!</h2>';
     showEndOfGameSummary(questionSection)
   }
 };
 
 const beginQuestionLoop = (questions) => {
+  if (game.questionDuration > 0) getIntenser()
   if (questions && questions.length > 0) {
     showCurrentQuestion(questions, 0)
   }

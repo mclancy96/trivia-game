@@ -37,6 +37,22 @@ const updateTimer = (endTime) => {
   }
 }
 
+const getIntenser = () => {
+  const thinkAudio = new Audio('think.mp3')
+  thinkAudio.playbackRate = game.questionDuration < 8 ? 1.2 : 1;
+  thinkAudio.volume = 1;
+  thinkAudio.loop = true
+  thinkAudio.play()
+  window.thinkAudio = thinkAudio
+}
+
+const stopThinkAudio = () => {
+  if (window.thinkAudio) {
+    window.thinkAudio.pause();
+    window.thinkAudio.currentTime = 0;
+  }
+}
+
 const startTimer = () => {
   if (game.questionDuration > 0) {
     const startTime = Date.now()
