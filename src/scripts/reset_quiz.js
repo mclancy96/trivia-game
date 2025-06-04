@@ -7,7 +7,7 @@ const resetQuiz = () => {
 const createAndAppendResetButton = (buttonDiv) => {
   const button = document.createElement('button')
   button.className = 'btn btn-lg btn-danger'
-  button.textContent = 'Reset Quiz'
+  button.textContent = 'Restart Quiz'
   button.addEventListener('click', resetQuiz)
   buttonDiv.appendChild(button)
 }

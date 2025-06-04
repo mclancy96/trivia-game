@@ -101,6 +101,7 @@ const showCurrentQuestion = (questions, currentQuestionIndex) => {
     displayQuestion(questions[currentQuestionIndex], currentQuestionIndex, questions);
   } else {
     questionSection.innerHTML = '<h2>Quiz Complete!</h2>';
+    showEndOfGameSummary(questionSection)
   }
 };
 
