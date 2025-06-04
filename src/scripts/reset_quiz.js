@@ -4,14 +4,19 @@ const resetQuiz = () => {
   promptQuizOptions();
 }
 
-const addResetButton = () => {
-  const content = document.querySelector('#content');
-  const buttonDiv = document.createElement('div')
-  buttonDiv.className = 'text-center m-4'
+const createAndAppendResetButton = (buttonDiv) => {
   const button = document.createElement('button')
   button.className = 'btn btn-lg btn-danger'
   button.textContent = 'Reset Quiz'
   button.addEventListener('click', resetQuiz)
   buttonDiv.appendChild(button)
-  content.appendChild(buttonDiv)
+}
+
+const addResetButton = () => {
+  const container = document.querySelector('#container');
+  const buttonDiv = document.createElement('div')
+  buttonDiv.id = 'resetButton'
+  buttonDiv.className = 'text-center position-absolute bottom-0 start-50 translate-middle-x'
+  createAndAppendResetButton(buttonDiv)
+  container.appendChild(buttonDiv)
 }

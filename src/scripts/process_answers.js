@@ -7,13 +7,42 @@ const updateScore = () => {
   remaining.textContent = game.questionCount - game.completedQuestions
 }
 
+const resetHeader = (statusBar, headerBar, status, correctCount, incorrectCount) => {
+  return () => {
+    statusBar.remove()
+    if (status === 'correct') {
+      headerBar.classList.remove('bg-success')
+      correctCount.className = 'text-success'
+    } else {
+      headerBar.classList.remove('bg-danger')
+      incorrectCount.className = 'text-danger'
+    }
+    headerBar.classList.add('bg-dark')
+  }
+}
+
+const setHeaderColors = (statusBar, headerBar, status, correctCount, incorrectCount) => {
+  headerBar.classList.remove('bg-dark')
+  if (status === 'correct') {
+    correctCount.className = 'text-white'
+    headerBar.classList.add('bg-success')
+    statusBar.className = 'bg-success text-white'
+  } else {
+    incorrectCount.className = 'text-white'
+    headerBar.classList.add('bg-danger')
+    statusBar.className = 'bg-danger text-white'
+  }
+  statusBar.textContent = titleCase(status)
+}
+
 const showStatus = (status) => {
   const headerBar = document.getElementById('header')
   const statusBar = document.createElement('h4')
-  statusBar.className = status === 'correct' ? 'text-success' : 'text-danger'
-  statusBar.textContent = titleCase(status)
+  const correctCount = document.getElementById('correct')
+  const incorrectCount = document.getElementById('incorrect')
+  setHeaderColors(statusBar, headerBar, status, correctCount, incorrectCount)
   headerBar.appendChild(statusBar)
-  setTimeout(() => statusBar.remove(), 3000)
+  setTimeout(resetHeader(statusBar, headerBar, status, correctCount, incorrectCount), 2000)
 }
 
 const saveAnswer = (questionId, result, selectedAnswer, correctAnswer) => {
