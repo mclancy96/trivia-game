@@ -38,7 +38,7 @@ const updateTimer = (endTime) => {
 }
 
 const getIntenser = () => {
-  const thinkAudio = new Audio('think.mp3')
+  const thinkAudio = new Audio('sounds/think.mp3')
   thinkAudio.playbackRate = game.questionDuration < 8 ? 1.2 : 1;
   thinkAudio.volume = 1;
   thinkAudio.loop = true
