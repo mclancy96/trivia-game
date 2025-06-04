@@ -25,6 +25,8 @@ const showCategoriesAndDifficulties = () => {
 
 const promptQuizOptions = () => {
   document.getElementById('content').innerHTML = ''
+  const resetButton = document.getElementById('resetButton')
+  if (resetButton) resetButton.innerHTML = ''
   showCategoriesAndDifficulties()
 }
 
