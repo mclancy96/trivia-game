@@ -74,5 +74,6 @@ In just three days, I set out to build an interactive quiz game that brings fun,
 ```bash
 git clone git@github.com:mclancy96/trivia-game.git
 cd trivia-game
+npm install -g json-server #If you haven't done so already
 open index.html
 ```
