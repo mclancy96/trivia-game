@@ -35,7 +35,12 @@ const setHeaderColors = (statusBar, headerBar, status, correctCount, incorrectCo
   statusBar.textContent = titleCase(status)
 }
 
+const playFeedback = (status) => {
+  status === 'correct' ? playSound('correct.m4a') : playSound('incorrect.m4a')
+}
+
 const showStatus = (status) => {
+  playFeedback(status)
   const headerBar = document.getElementById('header')
   const statusBar = document.createElement('h4')
   const correctCount = document.getElementById('correct')
