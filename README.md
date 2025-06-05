@@ -1,10 +1,13 @@
 # 🎮 QuizWhiz Trivia Game
 
-**QuizWhiz** is a fast-paced, browser-based trivia game that lets players test their knowledge across various categories and difficulty levels. Built using [The Trivia API](https://the-trivia-api.com/docs/v2/), the game provides instant feedback, real-time scoring, and an engaging user experience—all within a 3-day development sprint.
+**QuizWhiz** is a fast-paced, browser-based trivia game that lets players test their knowledge across various categories and difficulty levels. Built using [The Trivia API](https://the-trivia-api.com/docs/v2/), the game provides instant feedback, real-time scoring, and an engaging user experience.
+
+<img width="1463" alt="Screenshot 2025-06-05 at 08 31 36" src="https://github.com/user-attachments/assets/7298877f-c331-460a-ad70-7bf18eb6a886" />
 
 ---
 
 ## 🚀 Project Pitch
+
 
 ### 🧠 The Story
 
