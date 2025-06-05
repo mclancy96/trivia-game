@@ -42,7 +42,7 @@ const createAndAppendScoreDetails = (questionSection) => {
   createAndAppendScoreDetail(article, 'Incorrect Answers: ', game.answers.incorrect)
   createAndAppendScoreDetail(article, 'Percentage Correct: ', `${((game.answers.correct / game.questionCount) * 100).toFixed(2)}%`)
   createAndAppendScoreDetail(article, 'Elapsed Time: ', `${(((Date.now() - game.quizStarted) / 1000) / 60).toFixed(2)} minutes`)
-  createAndAppendScoreDetail(article, 'Overall Score: ', `${calculateCurrentScore()}`)
+  createAndAppendScoreDetail(article, 'Overall Score: ', `${(game.currentScore).toFixed(2)}`)
   questionSection.appendChild(article)
 }
 

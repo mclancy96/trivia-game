@@ -7,11 +7,11 @@ const setNextQuestion = (questions, questionIndex, correctAnswer) => {
   }
 }
 
-const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIndex, questionIndex) => {
+const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIndex, questionIndex, difficulty) => {
   const answerRadio = document.createElement('div')
   answerRadio.className = "form-check"
   answerRadio.innerHTML = `
-    <input class="form-check-input" type="radio" name="answerRadio" question="${questionIndex}" id="${answerIndex}" required value="${answer}">
+    <input class="form-check-input" type="radio" name="answerRadio" difficulty="${difficulty}" question="${questionIndex}" id="${answerIndex}" required value="${answer}">
     <label class="form-check-label" for="${answerIndex}">
       ${answer}
     </label>
@@ -19,18 +19,33 @@ const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIn
   questionRadiosDiv.appendChild(answerRadio)
 }
 
-const createAndAppendAnswerRadios = (answers, questionForm, questionIndex) => {
+const createAndAppendAnswerRadios = (answers, questionForm, questionIndex, difficulty) => {
   const questionRadiosDiv = document.createElement('div')
   questionRadiosDiv.className = 'card-text px-5 my-2'
-  answers.forEach((answer, answerIndex) => createAndAppendQuestionAnswerRadios(answer, questionRadiosDiv, answerIndex, questionIndex))
+  answers.forEach((answer, answerIndex) => createAndAppendQuestionAnswerRadios(answer, questionRadiosDiv, answerIndex, questionIndex, difficulty))
   questionForm.appendChild(questionRadiosDiv)
 }
 
-const createAndAppendQuestionTitle = (question, questionIndex, questionForm) => {
+const difficultyStyling = (difficulty) => {
+  switch (difficulty) {
+    case 'hard':
+      return 'text-danger'
+    case 'medium':
+      return 'text-warning'
+    default:
+      return 'text-success'
+  }
+}
+
+const createAndAppendQuestionTitle = (question, questionIndex, questionForm, difficulty) => {
   const questionTitle = document.createElement('h5')
   questionTitle.className = "card-title text-center"
   questionTitle.textContent = `${Number.parseInt(questionIndex) + 1}. ${question.question.text}`
   questionForm.appendChild(questionTitle)
+  const difficultyDisplay = document.createElement('p')
+  difficultyDisplay.className = `card-title text-center ${difficultyStyling(difficulty)}`
+  difficultyDisplay.textContent = `Difficulty: ${titleCase(difficulty)}`
+  questionForm.appendChild(difficultyDisplay)
 }
 
 const createAndAppendQuestionSubmitButton = (questionForm) => {
@@ -54,8 +69,8 @@ const createAndAppendAnswerForm = (question, questionIndex, questions, answers, 
   const questionForm = document.createElement('form')
   questionForm.className = 'd-flex flex-column justify-content-center align-items-center'
   const cardBody = createAndAppendCardFormat(questionForm)
-  createAndAppendQuestionTitle(question, questionIndex, cardBody)
-  createAndAppendAnswerRadios(answers, cardBody, questionIndex)
+  createAndAppendQuestionTitle(question, questionIndex, cardBody, question.difficulty)
+  createAndAppendAnswerRadios(answers, cardBody, questionIndex, question.difficulty)
   createAndAppendQuestionSubmitButton(cardBody)
   const checkAnswerAndDisplayNextQuestion = setNextQuestion(questions, questionIndex, correctAnswer)
   questionForm.addEventListener('submit', checkAnswerAndDisplayNextQuestion)
