@@ -85,4 +85,5 @@ const recordAnswer = (target, correctAnswer) => {
   const difficulty = selectedRadio.getAttribute('difficulty')
   if (selectedAnswer === correctAnswer) saveAnswerToGameObject(questionId, 'correct', selectedAnswer, correctAnswer, difficulty)
   else saveAnswerToGameObject(questionId, 'incorrect', selectedAnswer, correctAnswer, difficulty)
+  return selectedAnswer === correctAnswer
 }
