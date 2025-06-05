@@ -4,7 +4,7 @@
   "description": "A fun trivia game using a trivia API and a bunch of javascript",
   "main": "index.js",
   "scripts": {
-    "start": "npx json-server --watch db.json --port 8080"
+    "start": "json-server --watch db.json --port 8080 --static ."
   },
   "author": "",
   "license": "ISC",
