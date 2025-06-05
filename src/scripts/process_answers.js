@@ -1,10 +1,17 @@
+const calculateCurrentScore = () => {
+  const effortWeight = 5 //more competitive = lower weight, more casual = higher weight
+  return ((game.answers.correct / game.completedQuestions) * 100 + Math.log(game.completedQuestions + 1) * effortWeight).toFixed(2)
+}
+
 const updateScore = () => {
   const correct = document.getElementById('correct')
   const incorrect = document.getElementById('incorrect')
   const remaining = document.getElementById('remaining')
+  const currentScore = document.getElementById('currentScore')
   correct.textContent = game.answers.correct
   incorrect.textContent = game.answers.incorrect
   remaining.textContent = game.questionCount - game.completedQuestions
+  currentScore.textContent = calculateCurrentScore()
 }
 
 const resetHeader = (statusBar, headerBar, status, correctCount, incorrectCount) => {

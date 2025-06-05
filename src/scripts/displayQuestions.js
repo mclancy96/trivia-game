@@ -76,7 +76,7 @@ const displayScoreSection = () => {
   const score = document.getElementById('score')
   const scoreDisplay = document.createElement('div')
   scoreDisplay.innerHTML = `
-   <h5> Correct: <span id='correct' class='text-success'>0</span>  Incorrect: <span id='incorrect' class='text-danger'>0</span>  Remaining: <span id='remaining'>${game.questionCount - game.completedQuestions}</span></h5>
+   <h5> Correct: <span id='correct' class='text-success'>0</span>  Incorrect: <span id='incorrect' class='text-danger'>0</span>  Remaining: <span id='remaining'>${game.questionCount - game.completedQuestions}</span> Current Score: <span id='currentScore'>${game.answers.correct * game.completedQuestions}</span></h5>
   `
   score.appendChild(scoreDisplay)
 }
