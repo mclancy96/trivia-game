@@ -16,7 +16,7 @@ const setCheckboxId = (collectionName) => {
   return (item) => {
     const div = document.createElement('div')
     div.innerHTML = `
-      <div class="form-check">
+      <div class="form-check text-start">
         <input class="form-check-input" type="checkbox" value="" collection='${collectionName.toLowerCase()}' id="${item}">
         <label class="form-check-label" for="${item}">
           ${titleCase(item)}

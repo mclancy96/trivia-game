@@ -21,7 +21,7 @@ const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIn
 
 const createAndAppendAnswerRadios = (answers, questionForm, questionIndex, difficulty) => {
   const questionRadiosDiv = document.createElement('div')
-  questionRadiosDiv.className = 'card-text px-5 my-2'
+  questionRadiosDiv.className = 'card-text px-5 my-2 text-start'
   answers.forEach((answer, answerIndex) => createAndAppendQuestionAnswerRadios(answer, questionRadiosDiv, answerIndex, questionIndex, difficulty))
   questionForm.appendChild(questionRadiosDiv)
 }
