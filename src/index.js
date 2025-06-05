@@ -3,5 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   logo.addEventListener('click', () => {
     location.reload()
   })
+  showLeaderboard()
   getStarted()
 })

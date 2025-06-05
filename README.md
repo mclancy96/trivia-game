@@ -8,7 +8,6 @@
 
 ## 🚀 Project Pitch
 
-
 ### 🧠 The Story
 
 In just three days, I set out to build an interactive quiz game that brings fun, fast, and challenging trivia to your fingertips. Users select a topic and difficulty, then dive into a series of questions with instant feedback and score tracking. Simple to play, hard to master.
@@ -74,5 +73,7 @@ In just three days, I set out to build an interactive quiz game that brings fun,
 ```bash
 git clone git@github.com:mclancy96/trivia-game.git
 cd trivia-game
+npm install -g json-server #If you haven't done so already
+npx json-server --watch db.json
 open index.html
 ```

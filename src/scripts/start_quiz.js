@@ -8,7 +8,6 @@ const parseSelections = (selectedInputs) => {
 
 const startQuiz = (submitEvent) => {
   submitEvent.preventDefault()
-  console.log('Quiz started')
   const selectedInputs = submitEvent.target.querySelectorAll('input:checked')
   const { selectedCategories, selectedDifficulties } = parseSelections(Array.from(selectedInputs))
   const numberOfQuestions = document.querySelector('#questionsNumber').value

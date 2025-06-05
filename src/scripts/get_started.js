@@ -5,6 +5,7 @@ const resetGame = () => {
       incorrect: 0,
       recordedAnswers: {}
     },
+    currentScore: 0,
     questionCount: 0,
     completedQuestions: 0,
     questionDuration: 0,

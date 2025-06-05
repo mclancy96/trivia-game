@@ -1,10 +1,28 @@
-const updateScore = () => {
+const difficultyWeight = (difficulty) => {
+  switch (difficulty) {
+    case 'hard':
+      return 3
+    case 'medium':
+      return 2
+    default:
+      return 1
+  }
+}
+
+const calculateCurrentScore = (difficulty) => {
+  const effortWeight = 5 //more competitive = lower weight, more casual = higher weight
+  return ((game.answers.correct / game.completedQuestions) * 100 + Math.log(game.completedQuestions + 1) * effortWeight) * difficultyWeight(difficulty).toFixed(2)
+}
+
+const updateScoreDisplayed = () => {
   const correct = document.getElementById('correct')
   const incorrect = document.getElementById('incorrect')
   const remaining = document.getElementById('remaining')
+  const currentScore = document.getElementById('currentScore')
   correct.textContent = game.answers.correct
   incorrect.textContent = game.answers.incorrect
   remaining.textContent = game.questionCount - game.completedQuestions
+  currentScore.textContent = (game.currentScore).toFixed(2)
 }
 
 const resetHeader = (statusBar, headerBar, status, correctCount, incorrectCount) => {
@@ -50,21 +68,21 @@ const showStatus = (status) => {
   setTimeout(resetHeader(statusBar, headerBar, status, correctCount, incorrectCount), 2000)
 }
 
-const saveAnswer = (questionId, result, selectedAnswer, correctAnswer) => {
-  if (result === 'correct') {
-    game.answers.correct++
-  } else {
-    game.answers.incorrect++
-  }
+const saveAnswerToGameObject = (questionId, result, selectedAnswer, correctAnswer, difficulty) => {
+  if (result === 'correct') game.answers.correct++
+  else game.answers.incorrect++
   showStatus(result)
   game.completedQuestions++
   game.answers.recordedAnswers[questionId] = { selectedAnswer, correctAnswer }
-  updateScore()
+  game.currentScore = calculateCurrentScore(difficulty)
+  updateScoreDisplayed()
 }
 
 const recordAnswer = (target, correctAnswer) => {
-  const selectedAnswer = target.querySelector('input:checked').value
-  const questionId = target.querySelector('input:checked').getAttribute('question')
-  if (selectedAnswer === correctAnswer) saveAnswer(questionId, 'correct', selectedAnswer, correctAnswer)
-  else saveAnswer(questionId, 'incorrect', selectedAnswer, correctAnswer)
+  const selectedRadio = target.querySelector('input:checked')
+  const selectedAnswer = selectedRadio.value
+  const questionId = selectedRadio.getAttribute('question')
+  const difficulty = selectedRadio.getAttribute('difficulty')
+  if (selectedAnswer === correctAnswer) saveAnswerToGameObject(questionId, 'correct', selectedAnswer, correctAnswer, difficulty)
+  else saveAnswerToGameObject(questionId, 'incorrect', selectedAnswer, correctAnswer, difficulty)
 }
