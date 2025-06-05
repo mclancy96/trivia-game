@@ -18,7 +18,7 @@ const addTitle = (leaderboard) => {
 
 const addScore = (score, tr) => {
   const th = document.createElement('th')
-  th.textContent = `${score}`
+  th.textContent = `${(score).toFixed(2)}`
   tr.appendChild(th)
 }
 

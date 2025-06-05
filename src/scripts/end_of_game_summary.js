@@ -46,10 +46,38 @@ const createAndAppendScoreDetails = (questionSection) => {
   questionSection.appendChild(article)
 }
 
+const createAndAppendSaveScore = (questionSection) => {
+  const saveDiv = document.createElement('div')
+  saveDiv.innerHTML = `
+   <h2> Save Score to Leaderboard?</h2>
+   <p>Enter you name below to save your score</p>
+   <form id='saveScoreForm'>
+     <div class="input-group mb-3">
+       <input type="text" class="form-control" placeholder="Nihar Patel" aria-label="User's name" aria-describedby="save-score-button" id="username"  required>
+       <button class="btn btn-primary" type="submit" id="save-score-button">Save Score</button>
+     </div>
+   </form>
+  `
+  questionSection.appendChild(saveDiv)
+}
+
+const saveScore = async (submitEvent) => {
+  submitEvent.preventDefault()
+  const username = document.querySelector('#username')
+  document.querySelector('#save-score-button').disabled = true
+  await postScore({
+    username: username.value,
+    date: Date.now(),
+    score: game.currentScore
+  })
+  location.reload()
+}
+
 const showEndOfGameSummary = (questionSection) => {
   congratulate()
   createAndAppendScoreDetails(questionSection)
-  const score = document.getElementById('score')
-  score.innerHTML = ''
+  createAndAppendSaveScore(questionSection)
+  document.querySelector('#saveScoreForm').addEventListener('submit', saveScore)
+  document.getElementById('score').innerHTML = ''
 }
 
