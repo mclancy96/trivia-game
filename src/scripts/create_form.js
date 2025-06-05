@@ -53,9 +53,15 @@ const createAndAppendFieldset = (row, collection, collectionName) => {
   const col = document.createElement('div')
   col.className = 'col border p-2 m-1 border-2 border-dark rounded-3'
   const fieldSet = document.createElement('fieldset')
-  fieldSet.className = 'px-3'
+  fieldSet.className = 'px-4'
   createLegend(collectionName, fieldSet)
-  createAndAppendCheckboxes(fieldSet, collection, collectionName)
+  const flexDiv = document.createElement('div')
+  flexDiv.className = 'd-flex flex-column mx-auto'
+  flexDiv.style.maxWidth = '200px'
+  const createCheckbox = setCheckboxId(collectionName)
+  const newCheckboxes = collection.map(createCheckbox)
+  newCheckboxes.forEach(checkbox => flexDiv.appendChild(checkbox))
+  fieldSet.appendChild(flexDiv)
   col.appendChild(fieldSet)
   row.appendChild(col)
 }

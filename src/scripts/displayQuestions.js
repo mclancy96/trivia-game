@@ -10,8 +10,9 @@ const setNextQuestion = (questions, questionIndex, correctAnswer) => {
 const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIndex, questionIndex, difficulty) => {
   const answerRadio = document.createElement('div')
   answerRadio.className = "form-check"
+  const escapedAnswer = answer.replace(/"/g, '&quot;');
   answerRadio.innerHTML = `
-    <input class="form-check-input" type="radio" name="answerRadio" difficulty="${difficulty}" question="${questionIndex}" id="${answerIndex}" required value="${answer}">
+    <input class="form-check-input" type="radio" name="answerRadio" difficulty="${difficulty}" question="${questionIndex}" id="${answerIndex}" required value="${escapedAnswer}">
     <label class="form-check-label" for="${answerIndex}">
       ${answer}
     </label>
@@ -21,7 +22,8 @@ const createAndAppendQuestionAnswerRadios = (answer, questionRadiosDiv, answerIn
 
 const createAndAppendAnswerRadios = (answers, questionForm, questionIndex, difficulty) => {
   const questionRadiosDiv = document.createElement('div')
-  questionRadiosDiv.className = 'card-text px-5 my-2 text-start'
+  questionRadiosDiv.className = 'card-text text-start'
+  questionRadiosDiv.style.width = '200px';
   answers.forEach((answer, answerIndex) => createAndAppendQuestionAnswerRadios(answer, questionRadiosDiv, answerIndex, questionIndex, difficulty))
   questionForm.appendChild(questionRadiosDiv)
 }
@@ -57,9 +59,10 @@ const createAndAppendQuestionSubmitButton = (questionForm) => {
 
 const createAndAppendCardFormat = (form, difficulty) => {
   const card = document.createElement('div')
-  card.className = `card w-75 border-${difficultyStyling(difficulty)} border-2 rounded-4`
+  card.className = `card border-${difficultyStyling(difficulty)} border-2 rounded-4 bg-${difficultyStyling(difficulty)}-subtle`
+  card.style.width = '500px'
   const body = document.createElement('div')
-  body.className = 'card-body'
+  body.className = 'card-body d-flex flex-column justify-content-center align-items-center'
   card.appendChild(body)
   form.appendChild(card)
   return body
@@ -67,7 +70,6 @@ const createAndAppendCardFormat = (form, difficulty) => {
 
 const createAndAppendAnswerForm = (question, questionIndex, questions, answers, correctAnswer) => {
   const questionForm = document.createElement('form')
-  questionForm.className = 'd-flex flex-column justify-content-center align-items-center'
   const cardBody = createAndAppendCardFormat(questionForm, question.difficulty)
   createAndAppendQuestionTitle(question, questionIndex, cardBody, question.difficulty)
   createAndAppendAnswerRadios(answers, cardBody, questionIndex, question.difficulty)
