@@ -29,11 +29,11 @@ const createAndAppendAnswerRadios = (answers, questionForm, questionIndex, diffi
 const difficultyStyling = (difficulty) => {
   switch (difficulty) {
     case 'hard':
-      return 'text-danger'
+      return 'danger'
     case 'medium':
-      return 'text-warning'
+      return 'warning'
     default:
-      return 'text-success'
+      return 'success'
   }
 }
 
@@ -43,7 +43,7 @@ const createAndAppendQuestionTitle = (question, questionIndex, questionForm, dif
   questionTitle.textContent = `${Number.parseInt(questionIndex) + 1}. ${question.question.text}`
   questionForm.appendChild(questionTitle)
   const difficultyDisplay = document.createElement('p')
-  difficultyDisplay.className = `card-title text-center ${difficultyStyling(difficulty)}`
+  difficultyDisplay.className = `card-title text-center text-${difficultyStyling(difficulty)}`
   difficultyDisplay.textContent = `Difficulty: ${titleCase(difficulty)}`
   questionForm.appendChild(difficultyDisplay)
 }
@@ -55,9 +55,9 @@ const createAndAppendQuestionSubmitButton = (questionForm) => {
   questionForm.appendChild(button)
 }
 
-const createAndAppendCardFormat = (form) => {
+const createAndAppendCardFormat = (form, difficulty) => {
   const card = document.createElement('div')
-  card.className = 'card w-75'
+  card.className = `card w-75 border-${difficultyStyling(difficulty)} border-2 rounded-4`
   const body = document.createElement('div')
   body.className = 'card-body'
   card.appendChild(body)
@@ -68,7 +68,7 @@ const createAndAppendCardFormat = (form) => {
 const createAndAppendAnswerForm = (question, questionIndex, questions, answers, correctAnswer) => {
   const questionForm = document.createElement('form')
   questionForm.className = 'd-flex flex-column justify-content-center align-items-center'
-  const cardBody = createAndAppendCardFormat(questionForm)
+  const cardBody = createAndAppendCardFormat(questionForm, question.difficulty)
   createAndAppendQuestionTitle(question, questionIndex, cardBody, question.difficulty)
   createAndAppendAnswerRadios(answers, cardBody, questionIndex, question.difficulty)
   createAndAppendQuestionSubmitButton(cardBody)
