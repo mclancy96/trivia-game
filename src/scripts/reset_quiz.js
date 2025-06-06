@@ -18,7 +18,7 @@ const createAndAppendHomeButton = (buttonDiv) => {
   const button = document.createElement('button')
   button.className = 'btn btn-lg btn-info m-1'
   button.textContent = 'Go Home'
-  button.addEventListener('click', () => location.reload())
+  button.addEventListener('click', () => reloadLeaderboard())
   buttonDiv.appendChild(button)
 }
 

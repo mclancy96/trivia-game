@@ -1,3 +1,12 @@
+const reloadLeaderboard = () => {
+  const content = document.getElementById('content')
+  const resetButtonDiv = document.getElementById('resetButton')
+  content.innerHTML = '<button class="btn btn-success btn-lg" id="getStarted">Get Started</button>'
+  resetButtonDiv.innerHTML = ''
+  showLeaderboard()
+  getStarted()
+}
+
 const buildHeaderRow = (leaderboard) => {
   const thead = document.createElement('thead')
   thead.innerHTML = `

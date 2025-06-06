@@ -70,7 +70,7 @@ const saveScore = async (submitEvent) => {
     date: Date.now(),
     score: game.currentScore
   })
-  location.reload()
+  reloadLeaderboard()
 }
 
 const showEndOfGameSummary = (questionSection) => {
