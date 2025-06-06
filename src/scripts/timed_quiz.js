@@ -12,6 +12,7 @@ const createWrongInput = () => {
   const badInput = badInputDiv.querySelector('input')
   badInput.value = ''
   badInput.checked = true
+  badInput.hidden = true
   answerInputs.appendChild(badInput)
 }
 
@@ -19,7 +20,7 @@ const submitFormEmpty = () => {
   const form = document.querySelector('form');
   if (form) {
     createWrongInput()
-    form.dispatchEvent(new Event('submit'));
+    form.dispatchEvent(new SubmitEvent('submit', { bubbles: true, cancelable: true }));
   } else {
     console.error('No form found to submit');
   }
