@@ -1,9 +1,25 @@
 const setNextQuestion = (questions, questionIndex, correctAnswer) => {
   return (submitEvent) => {
     submitEvent.preventDefault();
-    if (timerIntervals.length > 0) clearOutIntervals()
-    recordAnswer(submitEvent.target, correctAnswer)
-    showCurrentQuestion(questions, questionIndex + 1)
+    if (timerIntervals.length > 0) clearOutIntervals();
+    const wasCorrect = recordAnswer(submitEvent.target, correctAnswer);
+    const form = submitEvent.target;
+    const feedbackDiv = document.createElement('div');
+    feedbackDiv.className = 'alert mt-3 ' + (wasCorrect ? 'alert-success' : 'alert-danger');
+    feedbackDiv.innerHTML = (wasCorrect
+      ? `<p>✅ Correct!</p>`
+      : `<p>❌ Incorrect. The correct answer was: <strong>${correctAnswer}</strong><p>`) + `<button class="btn btn-primary" id="next">Next Question -></button>`
+
+    form.appendChild(feedbackDiv);
+    form.querySelectorAll('input[name="answerRadio"]').forEach(r => r.disabled = true);
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = true
+      submitBtn.className = 'btn btn-sm btn-secondary'
+    };
+    document.querySelector('#next').addEventListener('click', () => {
+      showCurrentQuestion(questions, questionIndex + 1);
+    })
   }
 }
 
